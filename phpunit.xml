@@ -23,4 +23,10 @@
     <php>
         <const name="MEMCACHED_TEST_SERVER" value="127.0.0.1:11211" />
     </php>
+
+    <testsuites>
+        <testsuite name="All tests">
+            <directory suffix="Test.php" >./test/</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
