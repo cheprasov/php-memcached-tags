@@ -1,6 +1,6 @@
 {
   "name": "cheprasov/php-memcached-tags",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "MemcachedTags for PHP is a mechanism for adding tags to keys in Memcached. It is very useful, if you need to select or delete some keys by tags. And tags are really useful for group invalidation.",
   "homepage": "http://github.com/cheprasov/php-memcached-tags",
   "minimum-stability": "stable",
@@ -16,7 +16,7 @@
   },
   "require": {
     "php": ">=5.5",
-    "cheprasov/php-memcached-lock": "1.0.*"
+    "cheprasov/php-memcached-lock": "~1.0.4"
   },
   "require-dev": {
     "phpunit/phpunit": "4.8.*",

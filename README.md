@@ -2,7 +2,7 @@
 [![Latest Stable Version](https://poser.pugx.org/cheprasov/php-memcached-tags/v/stable)](https://packagist.org/packages/cheprasov/php-memcached-tags)
 [![Total Downloads](https://poser.pugx.org/cheprasov/php-memcached-tags/downloads)](https://packagist.org/packages/cheprasov/php-memcached-tags)
 
-# MemcachedTags v1.0.2 for PHP >= 5.5
+# MemcachedTags v1.0.3 for PHP >= 5.5
 
 ## About
 MemcachedTags for PHP is a mechanism for adding tags to keys in Memcached. It is very useful, if you need to select or delete some keys by tags. And tags are really useful for group invalidation.

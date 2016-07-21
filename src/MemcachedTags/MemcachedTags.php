@@ -16,7 +16,7 @@ use MemcachedLock\MemcachedLock;
 
 class MemcachedTags implements TagsInterface {
 
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     const COMPILATION_ALL = 0;
     const COMPILATION_AND = 1;
@@ -62,7 +62,7 @@ class MemcachedTags implements TagsInterface {
      * @return string
      */
     protected function getKeyNameForTag($tag) {
-        return $this->prefix. '_t_'. $tag;
+        return $this->prefix . self::PREFIX_TAG . $tag;
     }
 
     /**
@@ -86,7 +86,7 @@ class MemcachedTags implements TagsInterface {
      * @return string
      */
     protected function getKeyNameForKey($ktag) {
-        return $this->prefix. '_k_'. $ktag;
+        return $this->prefix . self::PREFIX_KEY . $ktag;
     }
 
     /**
