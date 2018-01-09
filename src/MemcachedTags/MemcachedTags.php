@@ -26,6 +26,7 @@ class MemcachedTags implements TagsInterface {
     const PREFIX_LOCK = '_MemcachedLock';
     const PREFIX_TAG  = '_t_';
     const PREFIX_KEY  = '_k_';
+    const TAGS_KEY    = '_tags_';
 
     /**
      * @var Memcached
@@ -183,6 +184,7 @@ class MemcachedTags implements TagsInterface {
             $serialized = $this->addData($this->Memcached->get($keyName), $tags);
             $this->Memcached->set($keyName, $serialized);
         }
+        $this->_registerTags($tags);
         return $count === count($tags);
     }
 
@@ -299,6 +301,7 @@ class MemcachedTags implements TagsInterface {
                 ++$result;
             }
         }
+        $this->_updateRegisty($tags);
         return $result;
     }
 
@@ -318,6 +321,9 @@ class MemcachedTags implements TagsInterface {
             $compilation = self::COMPILATION_OR;
         }
         $keys = $this->getKeysByTags($tags, $compilation);
+        if (is_null($keys)){
+            return false;
+        }
         return $this->_removeKeys($keys);
     }
 
@@ -391,6 +397,51 @@ class MemcachedTags implements TagsInterface {
             return $this->_addTagsToKeys((array) $tags, array_keys($items));
         }
         return false;
+    }
+    
+    /**
+     * @param array $tags
+     * @return bool
+     */
+    protected function _registerTags(array $tags){
+        $tagsKey = $this->getKeyNameForKey(self::TAGS_KEY);
+        $storedTags = $this->Memcached->get($tagsKey);
+        if ($storedTags){
+            $storedTags = array_unique(array_merge($storedTags,$tags));
+        } else {
+            $storedTags = $tags;
+        }
+        if ($this->Memcached->set($tagsKey, $storedTags)){
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 
+     * @param array $tags
+     * @return bool
+     */
+    protected function _updateRegisty(array $tags){
+        $tagsKey = $this->getKeyNameForKey(self::TAGS_KEY);
+        $storedTags = $this->Memcached->get($tagsKey);
+        if ($storedTags){
+            $storedTags = array_diff($storedTags,$tags);
+            if ($this->Memcached->set($tagsKey, $storedTags)){
+                return true;
+            }
+        } 
+        return false;
+    }
+    
+    /**
+     * 
+     * @return array $tags
+     */
+    public function getTags(){
+        $tagsKey = $this->getKeyNameForKey(self::TAGS_KEY);
+        $tags    = $this->Memcached->get($tagsKey);
+        return $tags;
     }
 
 } 
