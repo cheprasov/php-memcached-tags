@@ -90,16 +90,18 @@ interface TagsInterface {
      * @param string $key
      * @param string $value
      * @param string|string[] $tags
+     * @param int $timeout
      * @return bool
      */
-    public function setKeyWithTags($key, $value, $tags);
+    public function setKeyWithTags($key, $value, $tags, int $timeout);
 
     /**
      * Set values and tags to several keys.
      * @param array $items
      * @param string|string[] $tags
+     * @param int $timeout
      * @return bool
      */
-    public function setKeysWithTags(array $items, $tags);
+    public function setKeysWithTags(array $items, $tags, int $timeout);
 
 }

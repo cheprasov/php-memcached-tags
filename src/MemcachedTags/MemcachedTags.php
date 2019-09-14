@@ -380,9 +380,9 @@ class MemcachedTags implements TagsInterface {
     /**
      * @inheritdoc
      */
-    public function setKeyWithTags($key, $value, $tags) {
+    public function setKeyWithTags($key, $value, $tags, int $timeout = 0) {
         $Lock = $this->createLock();
-        if ($this->Memcached->set($key, $value)) {
+        if ($this->Memcached->set($key, $value, $timeout)) {
             return $this->_addTagsToKeys((array) $tags, (array) $key);
         }
         return false;
@@ -391,9 +391,9 @@ class MemcachedTags implements TagsInterface {
     /**
      * @inheritdoc
      */
-    public function setKeysWithTags(array $items, $tags) {
+    public function setKeysWithTags(array $items, $tags, int $timeout = 0) {
         $Lock = $this->createLock();
-        if ($this->Memcached->setMulti($items)) {
+        if ($this->Memcached->setMulti($items, $timeout)) {
             return $this->_addTagsToKeys((array) $tags, array_keys($items));
         }
         return false;

@@ -2,7 +2,7 @@
 [![Latest Stable Version](https://poser.pugx.org/cheprasov/php-memcached-tags/v/stable)](https://packagist.org/packages/cheprasov/php-memcached-tags)
 [![Total Downloads](https://poser.pugx.org/cheprasov/php-memcached-tags/downloads)](https://packagist.org/packages/cheprasov/php-memcached-tags)
 
-# MemcachedTags v1.0.5 for PHP >= 5.5
+# MemcachedTags v1.0.6 for PHP >= 5.5
 
 ## About
 MemcachedTags for PHP is a mechanism for adding tags to keys in Memcached. It is very useful, if you need to select or delete some keys by tags. And tags are really useful for group invalidation.
@@ -374,7 +374,7 @@ $MemcachedTags->getTagsByKey('user:1');
 ```
 
 
-#### `bool` MemcachedTags :: setKeyWithTags ( `string` **$key** , `string` **$value** , `string|string[]` **$tags** )
+#### `bool` MemcachedTags :: setKeyWithTags ( `string` **$key** , `string` **$value** , `string|string[]` **$tags**, `int` **$timeout = 0** )
 ---
 Set value and tags to key. Returns result as `bool`.
 
@@ -382,6 +382,7 @@ Set value and tags to key. Returns result as `bool`.
 1. string **$key** - The key under which to store the value.
 2. string **$value** - The value to store.
 3. string|string[] **$tags** - Tag or list of tags for the key.
+4. int **$timeout** - Optional: Cache timeout in seconds.
 
 ##### Example
 
@@ -390,13 +391,14 @@ $MemcachedTags->setKeyWithTags('user:1', 'Alexander', ['sex:m', 'city:London']);
 ```
 
 
-#### `bool` MemcachedTags :: setKeysWithTags ( `array` **$items** , `string|string[]` **$tags** )
+#### `bool` MemcachedTags :: setKeysWithTags ( `array` **$items** , `string|string[]` **$tags**, `int` **$timeout = 0**` )
 ---
 Set values and tags to several keys. Returns result as `bool`.
 
 ##### Method Parameters
 1. string **$items** - An array of key/value pairs to store on the server.
-3. string|string[] **$tags** - Tag or list of tags for the items.
+2. string|string[] **$tags** - Tag or list of tags for the items.
+3. int **$timeout** - Optional: Cache timeout in seconds.
 
 ##### Example
 
